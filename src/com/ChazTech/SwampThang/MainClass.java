@@ -9,9 +9,10 @@ public class MainClass {
 
 	public static void main(String[] args) {
 		MainClass mainClass = new MainClass();
+		Animations animations = new Animations();
 		String input = "";
 		boolean validResult = false;
-		System.out.println("");
+//		System.out.println("");
 		
 		boolean wonGame = false;
 		int treasureXPos;
@@ -20,7 +21,7 @@ public class MainClass {
 		int playerYPos;
 		int gridSize = 20;
 		int playerPos = gridSize/2;
-	
+		animations.titleScreen();
 		Random rand = new Random();
 		
 	    treasureXPos = rand.nextInt(gridSize) + 1;
@@ -37,7 +38,7 @@ public class MainClass {
 		playerYPos = playerPos;
 	    Player playerTile = new Player(playerXPos, playerYPos,false);
 
-		mainClass.intro(playerTile);
+		mainClass.intro(playerTile, animations);
 	    
 	    // MAIN GAME LOOP		
 //	    System.out.println("tx:" + treasureTile.getX() + " ty:" + treasureTile.getY());
@@ -122,7 +123,7 @@ public class MainClass {
 		String zSqR = df.format((Math.sqrt(xySqAdd)*10));
 		return zSqR;
 	}
-	public boolean bobNorth(String input) {
+	public boolean bobNorth(String input, Animations animations) {
 		input = input.toUpperCase();
 		if (input.contains("GO")) {
 			if (input.contains("EAST") || input.contains("SOUTH") || input.contains("WEST")) {
@@ -130,9 +131,9 @@ public class MainClass {
 				return false;
 			} else if (input.contains("NORTH")) {
 				System.out.println("You begin to proceed North through the door of light.");
-				waitForTime(3);
+				animations.waitForTime(3);
 				System.out.println("Once your back is turned, Bob smirks, knowing the doom that awaits you...");
-				bobLaugh();
+				animations.bobLaugh();
 				return true;
 			} else {
 				System.out.println("Bob shakes his head and again, indicates you to Go North");
@@ -143,365 +144,22 @@ public class MainClass {
 			return false;
 		}
 	}
-	public void bobPoint() {
-		System.out.println(
-			"        ____\r\n" + 
-			"      /      \\\r\n" + 
-			"     [| o  o |]\r\n" + 
-			"      |___>__|\r\n" + 
-			"       \\_<>_/\r\n" + 
-			"      /   \\ \\\r\n" + 
-			"      ||  .||\\\r\n" + 
-			"      ||  .||\\\\\r\n" + 
-			"      ||__.|| \\\\ \r\n" + 
-			"      {}    |  {},\r\n" + 
-			"       |  | |\r\n" + 
-			"       |  | |\r\n" + 
-			"       |__|_|_\r\n" + 
-			"       (___)__)");
-		waitForTime(200);
-		System.out.println("After a moment, Bob points, indicating you to Go North");
-		System.out.println(
-			"        ____\r\n" + 
-			"      /      \\\r\n" + 
-			"     [| o  o |]\r\n" + 
-			"      |___>__|\r\n" + 
-			"       \\_<>_/\r\n" + 
-			"      /   \\ -__\r\n" + 
-			"      ||  .||--''--_\r\n" + 
-			"      ||  .||  ''''_{}'\r\n" + 
-			"      ||__.||\r\n" + 
-			"      {}    |\r\n" + 
-			"       |  | |\r\n" + 
-			"       |  | |\r\n" + 
-			"       |__|_|_\r\n" + 
-			"       (___)__)");
-
-		waitForTime(200);
-		System.out.println("After a moment, Bob points, indicating you to Go North");
-		System.out.println(
-			"        ____\r\n" + 
-			"      /      \\\r\n" + 
-			"     [| o  o |]\r\n" + 
-			"      |___>__|\r\n" + 
-			"       \\_<>_/_______ __\r\n" + 
-			"      /   \\ \\,------ #\r\n" + 
-			"      ||  .||\r\n" + 
-			"      ||  .||\r\n" + 
-			"      ||__.|| \r\n" + 
-			"      {}    |\r\n" + 
-			"       |  | |\r\n" + 
-			"       |  | |\r\n" + 
-			"       |__|_|_\r\n" + 
-			"       (___)__)");
-	}
-	public void bobWave(String helloString) {
-		System.out.println(helloString);
-		System.out.println(
-			"        ____\r\n" + 
-			"      /      \\\r\n" + 
-			"     [| o  o |]\r\n" + 
-			"      |___>__|\r\n" + 
-			"       \\_<>_/\r\n" + 
-			"      /   \\ \\\r\n" + 
-			"      ||  .||\\\r\n" + 
-			"      ||  .|||\r\n" + 
-			"      ||__.||| \r\n" + 
-			"      {}    |}\r\n" + 
-			"       |  | |\r\n" + 
-			"       |  | |\r\n" + 
-			"       |__|_|_\r\n" + 
-			"       (___)__)");
-		waitForTime(200);
-		System.out.println(helloString);
-		System.out.println(
-			"        ____\r\n" + 
-			"      /      \\\r\n" + 
-			"     [| o  o |]\r\n" + 
-			"      |___>__|\r\n" + 
-			"       \\_<>_/\r\n" + 
-			"      /   \\ \\\r\n" + 
-			"     / |  .||\\\r\n" + 
-			"     |||  .|||\r\n" + 
-			"     |||__.||| \r\n" + 
-			"     {}|    |}\r\n" + 
-			"       |  | |\r\n" + 
-			"       |  | |\r\n" + 
-			"       |__|_|_\r\n" + 
-			"       (___)__)");
-		waitForTime(200);
-		System.out.println(helloString);
-		System.out.println(
-			"        ____\r\n" + 
-			"      /      \\\r\n" + 
-			"     [| o  o |]\r\n" + 
-			"      |___>__|\r\n" + 
-			"       \\_<>_/\r\n" + 
-			"      /   \\ \\\r\n" + 
-			"     //|  .||\\\r\n" + 
-			"    < ||  .|||\r\n" + 
-			"     {}|__.||| \r\n" + 
-			"       |    |}\r\n" + 
-			"       |  | |\r\n" + 
-			"       |  | |\r\n" + 
-			"       |__|_|_\r\n" + 
-			"       (___)__)");
-		waitForTime(200);
-		System.out.println(helloString);
-		System.out.println(
-			"        ____\r\n" + 
-			"      /      \\\r\n" + 
-			"     [| o  o |]\r\n" + 
-			"      |___>__|\r\n" + 
-			"       \\_<>_/\r\n" + 
-			"      /   \\ \\\r\n" + 
-			"     //|  .||\\\r\n" + 
-			"    <{}|  .|||\r\n" + 
-			"       |__.||| \r\n" + 
-			"       |    |}\r\n" + 
-			"       |  | |\r\n" + 
-			"       |  | |\r\n" + 
-			"       |__|_|_\r\n" + 
-			"       (___)__)");
-		waitForTime(200);
-		System.out.println(helloString);
-		System.out.println(
-			"        ____\r\n" + 
-			"      /      \\\r\n" + 
-			"     [| o  o |]\r\n" + 
-			"      |___>__|\r\n" + 
-			"       \\_<>_/\r\n" + 
-			"   ,, /   \\ \\\r\n" + 
-			"   {}//|  .||\\\r\n" + 
-			"    \\/ |  .|||\r\n" + 
-			"       |__.||| \r\n" + 
-			"       |    |}\r\n" + 
-			"       |  | |\r\n" + 
-			"       |  | |\r\n" + 
-			"       |__|_|_\r\n" + 
-			"       (___)__)");
-		waitForTime(200);
-		System.out.println(helloString);
-		System.out.println(
-			"        ____\r\n" + 
-			"      /      \\\r\n" + 
-			"     [| o  o |]\r\n" + 
-			"      |___>__|\r\n" + 
-			"  ,,,  \\_<>_/\r\n" + 
-			"   #' /   \\ \\\r\n" + 
-			"   \\\\//|  .||\\\r\n" + 
-			"    \\/ |  .|||\r\n" + 
-			"       |__.||| \r\n" + 
-			"       |    |}\r\n" + 
-			"       |  | |\r\n" + 
-			"       |  | |\r\n" + 
-			"       |__|_|_\r\n" + 
-			"       (___)__)");
-		waitForTime(200);
-		System.out.println(helloString);
-		System.out.println(
-				"        ____\r\n" + 
-				"      /      \\\r\n" + 
-				"     [| o  o |]\r\n" + 
-				" ,,,  |___>__|\r\n" + 
-				"  #'   \\_<>_/\r\n" + 
-				"  \\\\  /   \\ \\\r\n" + 
-				"   \\\\//|  .||\\\r\n" + 
-				"    \\/ |  .|||\r\n" + 
-				"       |__.||| \r\n" + 
-				"       |    |}\r\n" + 
-				"       |  | |\r\n" + 
-				"       |  | |\r\n" + 
-				"       |__|_|_\r\n" + 
-				"       (___)__)");
-			waitForTime(200);
-			System.out.println(helloString);
-			System.out.println(
-				"        ____\r\n" + 
-				"      /      \\\r\n" + 
-				"     [| o  o |]\r\n" + 
-				",,,   |___>__|\r\n" + 
-				" #'    \\_<>_/\r\n" + 
-				" \\\\   /   \\ \\\r\n" + 
-				"  \\\\ //|  .||\\\r\n" + 
-				"   \\\\/ |  .|||\r\n" + 
-				"       |__.||| \r\n" + 
-				"       |    |}\r\n" + 
-				"       |  | |\r\n" + 
-				"       |  | |\r\n" + 
-				"       |__|_|_\r\n" + 
-				"       (___)__)");
-			waitForTime(200);
-			System.out.println(helloString);
-			System.out.println(
-				"        ____\r\n" + 
-				"      /      \\\r\n" + 
-				"     [| o  o |]\r\n" + 
-				" ,,,  |___>__|\r\n" + 
-				"  #'   \\_<>_/\r\n" + 
-				"  \\\\  /   \\ \\\r\n" + 
-				"   \\\\//|  .||\\\r\n" + 
-				"    \\/ |  .|||\r\n" + 
-				"       |__.||| \r\n" + 
-				"       |    |}\r\n" + 
-				"       |  | |\r\n" + 
-				"       |  | |\r\n" + 
-				"       |__|_|_\r\n" + 
-				"       (___)__)");
-			waitForTime(200);
-			System.out.println(helloString);
-			System.out.println(
-				"        ____\r\n" + 
-				"      /      \\\r\n" + 
-				"     [| o  o |]\r\n" + 
-				"  ,,, |___>__|\r\n" + 
-				"   #'  \\_<>_/\r\n" + 
-				"   || /   \\ \\\r\n" + 
-				"   '|//|  .||\\\r\n" + 
-				"    |/ |  .|||\r\n" + 
-				"       |__.||| \r\n" + 
-				"       |    |}\r\n" + 
-				"       |  | |\r\n" + 
-				"       |  | |\r\n" + 
-				"       |__|_|_\r\n" + 
-				"       (___)__)");	
-			waitForTime(200);
-			System.out.println(helloString);
-			System.out.println(
-				"        ____\r\n" + 
-				"      /      \\\r\n" + 
-				"     [| o  o |]\r\n" + 
-				" ,,,  |___>__|\r\n" + 
-				"  #'   \\_<>_/\r\n" + 
-				"  \\\\  /   \\ \\\r\n" + 
-				"   \\\\//|  .||\\\r\n" + 
-				"    \\/ |  .|||\r\n" + 
-				"       |__.||| \r\n" + 
-				"       |    |}\r\n" + 
-				"       |  | |\r\n" + 
-				"       |  | |\r\n" + 
-				"       |__|_|_\r\n" + 
-				"       (___)__)");
-			waitForTime(200);
-			System.out.println(helloString);
-			System.out.println(
-				"        ____\r\n" + 
-				"      /      \\\r\n" + 
-				"     [| o  o |]\r\n" + 
-				"      |___>__|\r\n" + 
-				"  ,,,  \\_<>_/\r\n" + 
-				"   #' /   \\ \\\r\n" + 
-				"   \\\\//|  .||\\\r\n" + 
-				"    \\/ |  .|||\r\n" + 
-				"       |__.||| \r\n" + 
-				"       |    |}\r\n" + 
-				"       |  | |\r\n" + 
-				"       |  | |\r\n" + 
-				"       |__|_|_\r\n" + 
-				"       (___)__)");
-			waitForTime(200);
-			System.out.println(helloString);
-			System.out.println(
-				"        ____\r\n" + 
-				"      /      \\\r\n" + 
-				"     [| o  o |]\r\n" + 
-				"      |___>__|\r\n" + 
-				"       \\_<>_/\r\n" + 
-				"   ,, /   \\ \\\r\n" + 
-				"   {}//|  .||\\\r\n" + 
-				"    \\/ |  .|||\r\n" + 
-				"       |__.||| \r\n" + 
-				"       |    |}\r\n" + 
-				"       |  | |\r\n" + 
-				"       |  | |\r\n" + 
-				"       |__|_|_\r\n" + 
-				"       (___)__)");
-			waitForTime(200);
-			System.out.println(helloString);
-			System.out.println(
-				"        ____\r\n" + 
-				"      /      \\\r\n" + 
-				"     [| o  o |]\r\n" + 
-				"      |___>__|\r\n" + 
-				"       \\_<>_/\r\n" + 
-				"      /   \\ \\\r\n" + 
-				"     //|  .||\\\r\n" + 
-				"    <{}|  .|||\r\n" + 
-				"       |__.||| \r\n" + 
-				"       |    |}\r\n" + 
-				"       |  | |\r\n" + 
-				"       |  | |\r\n" + 
-				"       |__|_|_\r\n" + 
-				"       (___)__)");
-			waitForTime(200);
-			System.out.println(helloString);
-			System.out.println(
-				"        ____\r\n" + 
-				"      /      \\\r\n" + 
-				"     [| o  o |]\r\n" + 
-				"      |___>__|\r\n" + 
-				"       \\_<>_/\r\n" + 
-				"      /   \\ \\\r\n" + 
-				"     //|  .||\\\r\n" + 
-				"    < ||  .|||\r\n" + 
-				"     {}|__.||| \r\n" + 
-				"       |    |}\r\n" + 
-				"       |  | |\r\n" + 
-				"       |  | |\r\n" + 
-				"       |__|_|_\r\n" + 
-				"       (___)__)");
-			waitForTime(200);
-			System.out.println(helloString);
-			System.out.println(
-				"        ____\r\n" + 
-				"      /      \\\r\n" + 
-				"     [| o  o |]\r\n" + 
-				"      |___>__|\r\n" + 
-				"       \\_<>_/\r\n" + 
-				"      /   \\ \\\r\n" + 
-				"     / |  .||\\\r\n" + 
-				"     |||  .|||\r\n" + 
-				"     |||__.||| \r\n" + 
-				"     {}|    |}\r\n" + 
-				"       |  | |\r\n" + 
-				"       |  | |\r\n" + 
-				"       |__|_|_\r\n" + 
-				"       (___)__)");
-			waitForTime(200);
-			System.out.println(helloString);
-			System.out.println(
-				"        ____\r\n" + 
-				"      /      \\\r\n" + 
-				"     [| o  o |]\r\n" + 
-				"      |___>__|\r\n" + 
-				"       \\_<>_/\r\n" + 
-				"      /   \\ \\\r\n" + 
-				"      ||  .||\\\r\n" + 
-				"      ||  .|||\r\n" + 
-				"      ||__.||| \r\n" + 
-				"      {}    |}\r\n" + 
-				"       |  | |\r\n" + 
-				"       |  | |\r\n" + 
-				"       |__|_|_\r\n" + 
-				"       (___)__)");
-			waitForTime(200);
-	}
-	public boolean bobHello(String input, Player playerTile) {
+	public boolean bobHello(String input, Player playerTile, Animations animations) {
 		input = input.toUpperCase();
 		if (input.contains("HELLO") || input.contains("HI") || input.contains("HEY")) {
 			if (input.contains("SHOCKED BOB")) {
 				System.out.println("Bob doesn't like you pointing out his flaws, but waves back anyway.");
 				playerTile.setPlayerHealth(playerTile.getPlayerHealth()-1);
-				bobWave("Bob doesn't like you pointing out his flaws, but waves back anyway.");
+				animations.bobWave("Bob doesn't like you pointing out his flaws, but waves back anyway.");
 				return true;
 			} else if (input.contains("BOB")){
 				System.out.println("Bob nods his approval of your politeness and waves at you.");
 				playerTile.setPlayerHealth(playerTile.getPlayerHealth()+1);
-				bobWave("Bob nods his approval of your politeness and waves at you.");
+				animations.bobWave("Bob nods his approval of your politeness and waves at you.");
 				return true;
 			} else {
 				System.out.println("Bob waves back.");
-				bobWave("Bob waves back.");
+				animations.bobWave("Bob waves back.");
 				return true;
 			}
 		} else {
@@ -524,294 +182,55 @@ public class MainClass {
 			return false;
 		}
 	}
-	public void bobLaugh() {
-		System.out.println(
-				"\r\n"+
-			"               ____ \r\n" + 
-			"          _- '      ' -_ \r\n" + 
-			"      ,-'                '-.\r\n" + 
-			"    .'         -----        '.\r\n" + 
-			"   :       -------------      :\r\n" + 
-			"  _|         ---------        |_\r\n" + 
-			" //      ___          ___      \\\\\r\n" + 
-			"|| <    / . \\        / . \\    > ||\r\n" + 
-			" \\.|#   \\___/     \\  \\___/   #|./\r\n" + 
-			"   |##           __\\        ##|\r\n" + 
-			"   |###       #########    ###|\r\n" + 
-			"   ':########## /   \\ #######:'\r\n" + 
-			"     ':######## \\___/ #####:'\r\n" + 
-			"       ':################:'\r\n");
-		waitForTime(2000);
-		System.out.println(
-			"\r\n"+
-			"               ____ \r\n" + 
-			"          _- '      ' -_ \r\n" + 
-			"      ,-'                '-.\r\n" + 
-			"    .'         -----        '.\r\n" + 
-			"   :       -------------      :\r\n" + 
-			"  _|         ---------        |_\r\n" + 
-			" //      __            __      \\\\\r\n" + 
-			"|| <    / .'\\        /'. \\    > ||\r\n" + 
-			" \\.|#   '---'     \\  '---'   #|./\r\n" + 
-			"   |##           __\\        ##|\r\n" + 
-			"   |###       #########    ###|\r\n" + 
-			"   ':########## .---. #######:'\r\n" + 
-			"     ':######## '._.' #####:'\r\n" + 
-			"       ':################:'\r\n");
-		waitForTime(200);
-
-		System.out.println(
-				"\r\n"+
-			"               ____ \r\n" + 
-			"          _- '      ' -_ \r\n" + 
-			"      ,-'                '-.\r\n" + 
-			"    .'         -----        '.\r\n" + 
-			"   :       -------------      :\r\n" + 
-			"  _|         ---------        |_\r\n" +
-			" //      _       '      _      \\\\\r\n" + 
-			"|| <    / ''.        .'' \\    > ||\r\n" + 
-			" \\.|#   '-o-'     \\  '.o.'   #|./\r\n" + 
-			"   |##           __\\        ##|\r\n" + 
-			"   |###       #########    ###|\r\n" + 
-			"   ':########## .---. #######:'\r\n" + 
-			"     ':######## '._.' #####:'\r\n" + 
-			"       ':################:'\r\n");
-		waitForTime(200);
-
-		System.out.println(
-			"               ____ \r\n" + 
-			"          _- '      ' -_ \r\n" + 
-			"      ,-'                '-.\r\n" + 
-			"    .'         -----        '.\r\n" + 
-			"   :       -------------      :\r\n" + 
-			"  _|         ---------        |_\r\n" + 
-			" //      _       '      _      \\\\\r\n" + 
-			"|| <    / '.          .' \\    > ||\r\n" + 
-			" \\.|#   '-o-'     \\  '.o.'   #|./\r\n" + 
-			"   |##           __\\        ##|\r\n" + 
-			"   |###       #########    ###|\r\n" + 
-			"   ':########## .---. #######:'\r\n" + 
-			"    :######### :     : ######:\r\n" + 
-			"     ':######## '._.' #####:'\r\n" + 
-			"       ':################:'");
-		waitForTime(200);
-
-		System.out.println(
-				"\r\n"+
-			"               ____ \r\n" + 
-			"          _- '      ' -_ \r\n" + 
-			"      ,-'                '-.\r\n" + 
-			"    .'         -----        '.\r\n" + 
-			"   :       -------------      :\r\n" + 
-			"  _|         ---------        |_\r\n" +
-			" //      _       '      _      \\\\\r\n" + 
-			"|| <    / '.          .' \\    > ||\r\n" + 
-			" \\.|#   '-o-'     \\  '.o.'   #|./\r\n" + 
-			"   |##           __\\        ##|\r\n" + 
-			"   |###       #########    ###|\r\n" + 
-			"   ':########## .---. #######:'\r\n" + 
-			"     ':######## '._.' #####:'\r\n" + 
-			"       ':################:'\r\n");
-		waitForTime(200);
-
-		System.out.println(
-			"               ____ \r\n" + 
-			"          _- '      ' -_ \r\n" + 
-			"      ,-'                '-.\r\n" + 
-			"    .'         -----        '.\r\n" + 
-			"   :       -------------      :\r\n" + 
-			"  _|         ---------        |_\r\n" + 
-			" //      _       '      _      \\\\\r\n" + 
-			"|| <    / '.          .' \\    > ||\r\n" + 
-			" \\.|#   '-o-'     \\  '.o.'   #|./\r\n" + 
-			"   |##           __\\        ##|\r\n" + 
-			"   |###       #########    ###|\r\n" + 
-			"   ':########## .---. #######:'\r\n" + 
-			"    :######### :     : ######:\r\n" + 
-			"     ':######## '._.' #####:'\r\n" + 
-			"       ':################:'");
-		waitForTime(200);
-
-		System.out.println(
-				"\r\n"+
-			"               ____ \r\n" + 
-			"          _- '      ' -_ \r\n" + 
-			"      ,-'                '-.\r\n" + 
-			"    .'         -----        '.\r\n" + 
-			"   :       -------------      :\r\n" + 
-			"  _|         ---------        |_\r\n" +
-			" //      _       '      _      \\\\\r\n" + 
-			"|| <    / '.          .' \\    > ||\r\n" + 
-			" \\.|#   '-o-'     \\  '.o.'   #|./\r\n" + 
-			"   |##           __\\        ##|\r\n" + 
-			"   |###       #########    ###|\r\n" + 
-			"   ':########## .---. #######:'\r\n" + 
-			"     ':######## '._.' #####:'\r\n" + 
-			"       ':################:'\r\n");
-		waitForTime(200);
-
-		System.out.println(
-			"               ____ \r\n" + 
-			"          _- '      ' -_ \r\n" + 
-			"      ,-'                '-.\r\n" + 
-			"    .'         -----        '.\r\n" + 
-			"   :       -------------      :\r\n" + 
-			"  _|         ---------        |_\r\n" + 
-			" //      _       '      _      \\\\\r\n" + 
-			"|| <    / '.          .' \\    > ||\r\n" + 
-			" \\.|#   '-o-'     \\  '.o.'   #|./\r\n" + 
-			"   |##           __\\        ##|\r\n" + 
-			"   |###       #########    ###|\r\n" + 
-			"   ':########## .---. #######:'\r\n" + 
-			"    :######### :     : ######:\r\n" + 
-			"     ':######## '._.' #####:'\r\n" + 
-			"       ':################:'");
-		waitForTime(200);
-
-		System.out.println(
-				"\r\n"+
-			"               ____ \r\n" + 
-			"          _- '      ' -_ \r\n" + 
-			"      ,-'                '-.\r\n" + 
-			"    .'         -----        '.\r\n" + 
-			"   :       -------------      :\r\n" + 
-			"  _|         ---------        |_\r\n" +
-			" //      _       '      _      \\\\\r\n" + 
-			"|| <    / '.          .' \\    > ||\r\n" + 
-			" \\.|#   '-o-'     \\  '.o.'   #|./\r\n" + 
-			"   |##           __\\        ##|\r\n" + 
-			"   |###       #########    ###|\r\n" + 
-			"   ':########## .---. #######:'\r\n" + 
-			"     ':######## '._.' #####:'\r\n" + 
-			"       ':################:'\r\n");
-		waitForTime(200);
-
-		System.out.println(
-			"               ____ \r\n" + 
-			"          _- '      ' -_ \r\n" + 
-			"      ,-'                '-.\r\n" + 
-			"    .'         -----        '.\r\n" + 
-			"   :       -------------      :\r\n" + 
-			"  _|         ---------        |_\r\n" + 
-			" //      _       '      _      \\\\\r\n" + 
-			"|| <    / '.          .' \\    > ||\r\n" + 
-			" \\.|#   '-o-'     \\  '.o.'   #|./\r\n" + 
-			"   |##           __\\        ##|\r\n" + 
-			"   |###       #########    ###|\r\n" + 
-			"   ':########## .---. #######:'\r\n" + 
-			"    :######### :     : ######:\r\n" + 
-			"     ':######## '._.' #####:'\r\n" + 
-			"       ':################:'");
-		waitForTime(200);
-
-		System.out.println(
-				"\r\n"+
-			"               ____ \r\n" + 
-			"          _- '      ' -_ \r\n" + 
-			"      ,-'                '-.\r\n" + 
-			"    .'         -----        '.\r\n" + 
-			"   :       -------------      :\r\n" + 
-			"  _|         ---------        |_\r\n" +
-			" //      _       '      _      \\\\\r\n" + 
-			"|| <    / '.          .' \\    > ||\r\n" + 
-			" \\.|#   '-o-'     \\  '.o.'   #|./\r\n" + 
-			"   |##           __\\        ##|\r\n" + 
-			"   |###       #########    ###|\r\n" + 
-			"   ':########## .---. #######:'\r\n" + 
-			"     ':######## '._.' #####:'\r\n" + 
-			"       ':################:'\r\n");
-		waitForTime(200);
-		
-		System.out.println(
-			"               ____ \r\n" + 
-			"          _- '      ' -_ \r\n" + 
-			"      ,-'                '-.\r\n" + 
-			"    .'         -----        '.\r\n" + 
-			"   :       -------------      :\r\n" + 
-			"  _|         ---------        |_\r\n" + 
-			" //      _       '      _      \\\\\r\n" + 
-			"|| <    / '.          .' \\    > ||\r\n" + 
-			" \\.|#   '-o-'     \\  '.o.'   #|./\r\n" + 
-			"   |##           __\\        ##|\r\n" + 
-			"   |###       #########    ###|\r\n" + 
-			"   ':########## .---. #######:'\r\n" + 
-			"    :######### :     : ######:\r\n" + 
-			"     ':######## '._.' #####:'\r\n" + 
-			"       ':################:'");
-		waitForTime(200);
-
-		System.out.println(
-				"\r\n"+
-			"               ____ \r\n" + 
-			"          _- '      ' -_ \r\n" + 
-			"      ,-'                '-.\r\n" + 
-			"    .'         -----        '.\r\n" + 
-			"   :       -------------      :\r\n" + 
-			"  _|         ---------        |_\r\n" +
-			" //      _       '      _      \\\\\r\n" + 
-			"|| <    / '.          .' \\    > ||\r\n" + 
-			" \\.|#   '-o-'     \\  '.o.'   #|./\r\n" + 
-			"   |##           __\\        ##|\r\n" + 
-			"   |###       #########    ###|\r\n" + 
-			"   ':########## .---. #######:'\r\n" + 
-			"     ':######## '._.' #####:'\r\n" + 
-			"       ':################:'\r\n");
-		waitForTime(200);
-		waitForTime(3000);
-	}
 	
-	public void intro(Player playerTile) {
-		int typicalWaitTime = 0;
-		System.out.println("You awake from your slumber in a hurry, the sense of eyes peering over you.");
-		waitForTime(typicalWaitTime);
-		System.out.println("As the blur of your eyes settle, you begin to see the shape of someone looking shocked at you.");
-		waitForTime(typicalWaitTime);
-		System.out.println("You fling your head around all directions, quickly realising you have no idea where you are.");
-		waitForTime(typicalWaitTime);
-		System.out.println("You see nothing but blackness in all directions bar one. To the north is a door shaped light.");
-		waitForTime(typicalWaitTime);
-		System.out.println("To the side of the door is a sign that read;");
-		waitForTime(typicalWaitTime);
+	public void intro(Player playerTile, Animations animations) {
+		int typicalWaitTime = 500;
+		String message = "You awake from your slumber in a hurry, the sense of eyes peering over you. ";
+		animations.printToDisplay(message);
+		animations.waitForTime(typicalWaitTime);
+		message = message + "As the blur of your eyes settle, you begin to see the shape of someone looking shocked at you. ";
+		animations.printToDisplay(message);
+		animations.waitForTime(typicalWaitTime);
+		message = message + "You fling your head around all directions, quickly realising you have no idea where you are. ";
+		animations.printToDisplay(message);
+		animations.waitForTime(typicalWaitTime);
+		message = message + "You see nothing but blackness in all directions bar one. To the north is a door shaped light. ";
+		animations.printToDisplay(message);
+		animations.waitForTime(typicalWaitTime);
+		message = message + "To the side of the door is a sign that read; ";
+		animations.printToDisplay(message);
+		animations.waitForTime(typicalWaitTime);
 		String input = "";
 		boolean validResult = false;
-		System.out.println("'This is Shocked Bob, say hello to Shocked Bob'");
-		System.out.println(
-"        ____\r\n" + 
-"      /      \\\r\n" + 
-"     [| o  o |]\r\n" + 
-"      |___>__|\r\n" + 
-"       \\_<>_/\r\n" + 
-"      /   \\ \\\r\n" + 
-"      ||  .||\\\r\n" + 
-"      ||  .|||\r\n" + 
-"      ||__.||| \r\n" + 
-"      {}    |}\r\n" + 
-"       |  | |\r\n" + 
-"       |  | |\r\n" + 
-"       |__|_|_\r\n" + 
-"       (___)__)");
+		message = "'This is Shocked Bob, say hello to Shocked Bob'\r\n" +
+				"        ____\r\n" + 
+				"      /      \\\r\n" + 
+				"     [| o  o |]\r\n" + 
+				"      |___>__|\r\n" + 
+				"       \\_<>_/\r\n" + 
+				"      /   \\ \\\r\n" + 
+				"      ||  .||\\\r\n" + 
+				"      ||  .|||\r\n" + 
+				"      ||__.||| \r\n" + 
+				"      {}    |}\r\n" + 
+				"       |  | |\r\n" + 
+				"       |  | |\r\n" + 
+				"       |__|_|_\r\n" + 
+				"       (___)__)";
+		animations.printToDisplay(message);
 		Scanner scanner = new Scanner(System.in);
 		do {
 			input = scanner.nextLine();
-			validResult = bobHello(input, playerTile);
+			validResult = bobHello(input, playerTile, animations);
 		} while(!validResult);
 		validResult = false;
-		waitForTime(2);
+		animations.waitForTime(2);
 		System.out.println("After a moment, Bob points, indicating you to Go North");
-		bobPoint();
+		animations.bobPoint();
 
 		do {
 			input = scanner.nextLine();
-			validResult = bobNorth(input);
+			validResult = bobNorth(input, animations);
 		} while(!validResult);
 	}	
-	public void waitForTime(int time) {
-		try {
-//			TimeUnit.SECONDS.sleep(time);
-			TimeUnit.MILLISECONDS.sleep(time);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }
