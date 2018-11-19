@@ -125,22 +125,25 @@ public class MainClass {
 	}
 	public boolean bobNorth(String input, Animations animations) {
 		input = input.toUpperCase();
+		String message;
 		if (input.contains("GO")) {
 			if (input.contains("EAST") || input.contains("SOUTH") || input.contains("WEST")) {
-				System.out.println("Bob shakes his head and again, indicates you to Go North");
+				message = "Bob shakes his head and again, indicates you to Go North";
+				animations.bobPoint(message, true);
 				return false;
 			} else if (input.contains("NORTH")) {
-				System.out.println("You begin to proceed North through the door of light.");
+				animations.printToDisplay("You begin to proceed North through the door of light.");
 				animations.waitForTime(3);
-				System.out.println("Once your back is turned, Bob smirks, knowing the doom that awaits you...");
-				animations.bobLaugh();
+				animations.bobLaugh("Once your back is turned, Bob smirks, knowing the doom that awaits you...");
 				return true;
 			} else {
-				System.out.println("Bob shakes his head and again, indicates you to Go North");
+				message = "Bob shakes his head and again, indicates you to Go North";
+				animations.bobPoint(message, true);
 				return false;
 			}
 		} else {
-			System.out.println("Bob shakes his head and again, indicates you to Go North");
+			message = "Bob looks at you shocked, that wasn't what he expected...";
+			animations.bobPoint(message, true);
 			return false;
 		}
 	}
@@ -148,37 +151,42 @@ public class MainClass {
 		input = input.toUpperCase();
 		if (input.contains("HELLO") || input.contains("HI") || input.contains("HEY")) {
 			if (input.contains("SHOCKED BOB")) {
-				System.out.println("Bob doesn't like you pointing out his flaws, but waves back anyway.");
 				playerTile.setPlayerHealth(playerTile.getPlayerHealth()-1);
 				animations.bobWave("Bob doesn't like you pointing out his flaws, but waves back anyway.");
 				return true;
 			} else if (input.contains("BOB")){
-				System.out.println("Bob nods his approval of your politeness and waves at you.");
 				playerTile.setPlayerHealth(playerTile.getPlayerHealth()+1);
 				animations.bobWave("Bob nods his approval of your politeness and waves at you.");
 				return true;
 			} else {
-				System.out.println("Bob waves back.");
 				animations.bobWave("Bob waves back.");
 				return true;
 			}
 		} else {
 			System.out.println("Bob looks shocked at you... that wasn't what he expected.");
 			System.out.println(
-					"        ____\r\n" + 
-					"      /      \\\r\n" + 
-					"     [| o  o |]\r\n" + 
-					"      |___>__|\r\n" + 
-					"       \\_<>_/\r\n" + 
-					"      /   \\ \\\r\n" + 
-					"      ||  .||\\\r\n" + 
-					"      ||  .|||\r\n" + 
-					"      ||__.||| \r\n" + 
-					"      {}    |}\r\n" + 
-					"       |  | |\r\n" + 
-					"       |  | |\r\n" + 
-					"       |__|_|_\r\n" + 
-					"       (___)__)");
+					"|        ____\r\n" + 
+					"|      /      \\\r\n" + 
+					"|     [| o  o |]\r\n" + 
+					"|      |___>__|\r\n" + 
+					"|       \\_<>_/\r\n" + 
+					"|      /   \\ \\\r\n" + 
+					"|      ||  .||\\\r\n" + 
+					"|      ||  .|||\r\n" + 
+					"|      ||__.||| \r\n" + 
+					"|      {}    |}\r\n" + 
+					"|       |  | |\r\n" + 
+					"|       |  | |\r\n" + 
+					"|       |__|_|_\r\n" + 
+					"|       (___)__)" +
+					"|                                                                                     |\r\n" + 
+					"|                                                                                     |\r\n" + 
+					"|                                                                                     |\r\n" + 
+					"|                                                                                     |\r\n" + 
+					"|                                                                                     |\r\n" + 
+					"|                                                                                     |\r\n" + 
+					"|                                                                                     |\r\n" + 
+					"+-------------------------------------------------------------------------------------+");
 			return false;
 		}
 	}
@@ -202,22 +210,31 @@ public class MainClass {
 		animations.waitForTime(typicalWaitTime);
 		String input = "";
 		boolean validResult = false;
-		message = "'This is Shocked Bob, say hello to Shocked Bob'\r\n" +
-				"        ____\r\n" + 
-				"      /      \\\r\n" + 
-				"     [| o  o |]\r\n" + 
-				"      |___>__|\r\n" + 
-				"       \\_<>_/\r\n" + 
-				"      /   \\ \\\r\n" + 
-				"      ||  .||\\\r\n" + 
-				"      ||  .|||\r\n" + 
-				"      ||__.||| \r\n" + 
-				"      {}    |}\r\n" + 
-				"       |  | |\r\n" + 
-				"       |  | |\r\n" + 
-				"       |__|_|_\r\n" + 
-				"       (___)__)";
-		animations.printToDisplay(message);
+		System.out.println(
+				"+-------------------------------------------------------------------------------------+\r\n" +
+				"| 'This is Shocked Bob, say hello to Shocked Bob'                                     |\r\n" +
+				"|        ____                                                                         |\r\n" + 
+				"|      /      \\                                                                       |\r\n" + 
+				"|     [| o  o |]                                                                      |\r\n" + 
+				"|      |___>__|                                                                       |\r\n" + 
+				"|       \\_<>_/                                                                        |\r\n" + 
+				"|      /   \\ \\                                                                        |\r\n" + 
+				"|      ||  .|||                                                                       |\r\n" + 
+				"|      ||  .|||                                                                       |\r\n" + 
+				"|      ||__.|||                                                                       |\r\n" + 
+				"|      {}    |}                                                                       |\r\n" + 
+				"|       |  | |                                                                        |\r\n" + 
+				"|       |  | |                                                                        |\r\n" + 
+				"|       |__|_|_                                                                       |\r\n" + 
+				"|       (___)__)                                                                      |\r\n" +
+				"|                                                                                     |\r\n" + 
+				"|                                                                                     |\r\n" + 
+				"|                                                                                     |\r\n" + 
+				"|                                                                                     |\r\n" + 
+				"|                                                                                     |\r\n" + 
+				"|                                                                                     |\r\n" + 
+				"|                                                                                     |\r\n" + 
+				"+-------------------------------------------------------------------------------------+");
 		Scanner scanner = new Scanner(System.in);
 		do {
 			input = scanner.nextLine();
@@ -225,8 +242,8 @@ public class MainClass {
 		} while(!validResult);
 		validResult = false;
 		animations.waitForTime(2);
-		System.out.println("After a moment, Bob points, indicating you to Go North");
-		animations.bobPoint();
+		message = "After a moment, Bob indicates you to Go North";
+		animations.bobPoint(message, false);
 
 		do {
 			input = scanner.nextLine();
