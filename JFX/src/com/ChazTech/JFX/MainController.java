@@ -2,11 +2,14 @@ package com.ChazTech.JFX;
 
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -15,6 +18,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.util.Duration;
 
 public class MainController {
@@ -22,7 +27,15 @@ public class MainController {
 	Timeline timeline;
 	ArrayList<ALObject> animationList = new ArrayList<ALObject>();
 	ArrayList<String> animationSlide = new ArrayList<String>();
+	ArrayList<String> backupSlide = new ArrayList<String>();
+	Boolean newGame = false;
+	String difficulty;
+	int gridSize;
 
+	@FXML
+	private Label command;
+	@FXML
+	private Label displayArea;
 	@FXML
 	private Label disp1;
 	@FXML
@@ -71,38 +84,156 @@ public class MainController {
 	private Label disp23;
 	@FXML
 	private Label disp24;
-
-	public void initialize() {
-		System.out.println("initialised");
-		startAnimation();
+	@FXML
+	private Button btnNorth;
+	@FXML
+	private Button btnEast;
+	@FXML
+	private Button btnSouth;
+	@FXML
+	private Button btnWest;
+	@FXML
+	private TextField focusLoss;
+	@FXML
+	private TextField inputCommand;
+	@FXML
+	public void onEnter(ActionEvent event){
+		System.out.println(inputCommand.getText());
+		String command = inputCommand.getText().toLowerCase();
+		if (command.equals("help")) {
+			System.out.println("Loading Help Screen...");
+			try {
+				help();
+			} catch (Exception e) {
+			}
+			displayAnimation("HelpScreen");
+		}
+		if (command.equals("hide help")) {
+			hidehelp();
+		}
+		if (command.contains("start game")) {
+			String[] inputs = command.split(" ");
+			int i = 1;
+			for (String a : inputs) {
+				if (i == 3) {
+					try {
+						gridSize = Integer.parseInt(a);
+					} catch (Exception e) {
+					}
+			}
+				if (i == 4) {
+					difficulty = a;
+				}
+				i++;
+			}
+			if (difficulty == null) {
+				disp1.setText("New game started | Difficult:" + difficulty + " | Grid Size:" + gridSize);
+			}
+		}
+		//	   focusLoss.setVisible(true);
+		//	   focusLoss.requestFocus();
+		//	   focusLoss.setVisible(false);
+		inputCommand.clear();
 	}
 
+	//INITIATE
+	public void initialize() {		
+		btnNorth.setVisible(false);
+		btnEast.setVisible(false);
+		btnSouth.setVisible(false);
+		btnWest.setVisible(false);
+		inputCommand.setVisible(false);
+		command.setVisible(false);
+		focusLoss.setVisible(false);
+		startAnimation();
+	}
+	public void setVisible() {
+		btnNorth.setVisible(true);
+		btnEast.setVisible(true);
+		btnSouth.setVisible(true);
+		btnWest.setVisible(true);
+		inputCommand.setVisible(true);
+		command.setVisible(true);
+	}
+
+	//MOVEMENT
 	public void goNorth(ActionEvent event) {
 		System.out.println("N");
 		disp1.setText("N");
 	}
 	public void goEast(ActionEvent event) {
 		System.out.println("E");
-		disp1.setText("E");
+		displayArea.setText("E");
 	}
 	public void goSouth(ActionEvent event) {
 		System.out.println("S");
-		disp1.setText("S");
+		displayArea.setText("S");
 	}
 	public void goWest(ActionEvent event) {
 		System.out.println("W");
-		disp1.setText("W");
+		displayArea.setText("W");
 	}
+	
+	//HELP
+	public void help() {
+		backupSlide.add(disp1.getText());
+		backupSlide.add(disp2.getText());
+		backupSlide.add(disp3.getText());
+		backupSlide.add(disp4.getText());
+		backupSlide.add(disp5.getText());
+		backupSlide.add(disp6.getText());
+		backupSlide.add(disp7.getText());
+		backupSlide.add(disp8.getText());
+		backupSlide.add(disp9.getText());
+		backupSlide.add(disp10.getText());
+		backupSlide.add(disp11.getText());
+		backupSlide.add(disp12.getText());
+		backupSlide.add(disp13.getText());
+		backupSlide.add(disp14.getText());
+		backupSlide.add(disp15.getText());
+		backupSlide.add(disp16.getText());
+		backupSlide.add(disp17.getText());
+		backupSlide.add(disp18.getText());
+		backupSlide.add(disp19.getText());
+		backupSlide.add(disp20.getText());
+		backupSlide.add(disp21.getText());
+		backupSlide.add(disp22.getText());
+		backupSlide.add(disp23.getText());
+		backupSlide.add(disp24.getText());
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter("Assets/BackupScreen"));
+			writer.write("");
+			for (int i = 0; i < 24; i++) {
+				if (i != 23) {
+					writer.write(backupSlide.get(i) + "\r\n");
+				} else {
+					writer.write(backupSlide.get(23));
+				}
+			}
+		    writer.close();
+		} catch (IOException e) {
+			
+		}
+	}
+	public void hidehelp() {
+		displayAnimation("BackupScreen", 100);
+	}
+	//ANIMATIONS
 	public void startAnimation() {
-		displayAnimation("TitleAnimation");
+		displayAnimation("TitleAnimation", 100);
 	}
 	public void startAnimation(ActionEvent event) {
-		displayAnimation("TitleAnimation");
+		btnNorth.setVisible(false);
+		btnEast.setVisible(false);
+		btnSouth.setVisible(false);
+		btnWest.setVisible(false);
+		displayAnimation("TitleAnimation",100);
+	}
+	public void startAnimation(String filename) {
+		displayAnimation(filename,100);
 	}
     public void changeAnimation(int animationInt, int animationLength) {
     	System.out.println("Slide:" + animationInt + "/" + animationLength);
-//    	System.out.println(animationList.get(32).getALObject().get(1));
-//    	System.out.println(animationList.get(33).getALObject().get(1));
     	for (int i = 1; i <= 24; i++) {
     		switch(i) {
     		case 1:
@@ -183,26 +314,20 @@ public class MainController {
     	if (animationInt == animationLength) {
     		animationInt = 1;
             timeline.stop();
+            setVisible();
     	}
     }
-	public void displayAnimation(String fileName) {
+	public void displayAnimation(String fileName, int frameTime) {
 		BufferedReader reader;
 		try {
 			reader = new BufferedReader(new FileReader("Assets/" + fileName));
 			String line = reader.readLine();
 			int i = 1;
 			int j = 0;
-			animationSlide.clear();
 			while (line != null) {
-//				System.out.println("" + i + line);
 				if (i == 25) {
-//					ALObject myALObject = new ALObject(animationSlide);
 					animationList.add(new ALObject(animationSlide));
-					System.out.println(animationList.get(animationList.size() - 1).getALObject().get(15));
-//					System.out.println("Added:'" + animationSlide + "'");
-//					System.out.println("To:'" + animationList + "'");
-//					animationList.add(animationSlide);
-					animationSlide.clear();
+					animationSlide = new ArrayList<String>();
 					i = 1;
 				} else {
 					animationSlide.add(line);
@@ -211,11 +336,8 @@ public class MainController {
 					line = reader.readLine();
 				}
 			}
-			System.out.println("FINDME" + animationList.get(32).getALObject().get(11));
-//			ALObject myALObject = new ALObject(animationSlide);
-//			animationList.add(new ALObject(animationSlide));
-//			System.out.println("Added:'" + animationSlide + "'");
-//			System.out.println("To:'" + animationList + "'");
+			animationList.add(new ALObject(animationSlide));
+			animationSlide = new ArrayList<String>();
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -223,7 +345,7 @@ public class MainController {
     	int animationLength = animationList.size();
         timeline = new Timeline(
             new KeyFrame(
-                Duration.seconds(1),
+                Duration.millis(frameTime),
                 new EventHandler<ActionEvent>() {
                     @Override public void handle(ActionEvent actionEvent) {   
                         Platform.runLater(()->{
@@ -236,5 +358,9 @@ public class MainController {
         );
         timeline.setCycleCount(animationLength); 
         timeline.play();
+	}
+
+	public void displayText(String text) {
+		
 	}
 }
